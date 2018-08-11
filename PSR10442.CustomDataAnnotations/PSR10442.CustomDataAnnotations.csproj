@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3C291DD5-AA23-463C-8111-F1E84BAEABDD}</ProjectGuid>
+    <ProjectGuid>{205E6342-530B-4A38-966E-0D45CE9D3A2A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PSR10442.Models</RootNamespace>
-    <AssemblyName>PSR10442.Models</AssemblyName>
+    <RootNamespace>PSR10442.CustomDataAnnotations</RootNamespace>
+    <AssemblyName>PSR10442.CustomDataAnnotations</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,17 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cours.cs" />
-    <Compile Include="DemandeSeance.cs" />
-    <Compile Include="Etudiant.cs" />
-    <Compile Include="Message.cs" />
+    <Compile Include="CurrentDateAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PSR10442.CustomDataAnnotations\PSR10442.CustomDataAnnotations.csproj">
-      <Project>{205e6342-530b-4a38-966e-0d45ce9d3a2a}</Project>
-      <Name>PSR10442.CustomDataAnnotations</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
