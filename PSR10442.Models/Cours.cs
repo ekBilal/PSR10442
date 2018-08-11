@@ -9,10 +9,10 @@ namespace PSR10442.Models
     public class Cours
     {
 		[Key]
-		public int Id;
-
-		public string Nom;
-		public string Libele;
-
-    }
+		public int Id { get; set; }
+		[Required]
+		public string Nom { get; set; }
+		[Required]
+		public string Intitule{ get; set; }
+}
 }
