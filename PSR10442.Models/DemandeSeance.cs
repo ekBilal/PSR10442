@@ -18,7 +18,7 @@ namespace PSR10442.Models
 		[Required, CurrentDate]
 		public DateTime Fin { get; set; }
 		public string Commentaire { get; set; }
-		[Required, DefaultValue(Etat.EnAttente)]
+		[Required, DefaultValue(EtatDemande.EnAttente)]
 		public Etat Etat { get; set; }
 	}
 }

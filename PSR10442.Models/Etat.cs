@@ -2,6 +2,13 @@
 {
 	public enum Etat
 	{
+		Actif,
+		Efface
+	}
+
+
+	public enum EtatDemande
+	{
 		EnAttente,
 		Refuse,
 		Accepte,

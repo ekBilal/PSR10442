@@ -14,5 +14,7 @@ namespace PSR10442.Models
 		public string Nom { get; set; }
 		[Required]
 		public string Intitule{ get; set; }
+		[Required, DefaultValue(Etat.Actif)]
+		public Etat Etat { get; set; }
 }
 }
