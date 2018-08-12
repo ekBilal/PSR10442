@@ -13,12 +13,10 @@ namespace PSR10442.Models
 		public int Id { get; set; }
 		[Required]
 		public virtual Etudiant Etudiant { get; set; }
-		[Required, CurrentDate]
-		public DateTime Debut { get; set; }
-		[Required, CurrentDate]
-		public DateTime Fin { get; set; }
+		[Required]
+		public virtual Cours cours { get; set; }
 		public string Commentaire { get; set; }
-		[Required, DefaultValue(EtatDemande.EnAttente)]
+		[Required, DefaultValue(Etat.EnAttente)]
 		public Etat Etat { get; set; }
 	}
 }

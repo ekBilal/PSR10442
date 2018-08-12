@@ -12,9 +12,9 @@ namespace PSR10442.Models
 		public int Id { get; set; }
 		[Required]
 		public string Nom { get; set; }
-		[Required]
+		[Required, Index(IsUnique = true)]
 		public string Intitule{ get; set; }
-		[Required, DefaultValue(Etat.Actif)]
-		public Etat Etat { get; set; }
+		[Required, DefaultValue(true)]
+		public bool Actif { get; set; }
 }
 }
