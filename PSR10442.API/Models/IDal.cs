@@ -6,7 +6,7 @@ using System.Web;
 using PSR10442.Models;
 
 
-namespace PSR10442.API.Dal
+namespace PSR10442.API.Models
 {
 	public interface IDal:IDisposable
 	{

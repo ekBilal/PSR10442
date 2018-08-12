@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,7 +14,9 @@ namespace PSR10442.Models
 		public string Nom { get; set; }
 		[Required]
 		public string Prenom { get; set; }
+		[ForeignKey("Id")]
 		public virtual List<Cours> Inscrit { get; set; }
+		[ForeignKey("Id")]
 		public virtual List<Cours> Tuteur { get; set; }
 		[Required, DefaultValue(true)]
 		public bool estInscrit { get; set; }

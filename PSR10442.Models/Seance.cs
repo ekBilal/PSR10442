@@ -1,18 +1,17 @@
-﻿using PSR10442.CustomDataAnnotations;
-using System;
-using System.ComponentModel;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PSR10442.Models
 {
 	public class Seance
 	{
 		public int Id { get; set; }
-		[Required]
+		[Required, ForeignKey("Id")]
 		public virtual DemandeSeance Demande { get; set; }
-		[Required]
+		[Required, ForeignKey("Id")]
 		public virtual Etudiant Tuteur { get; set; }
-		[Required, CurrentDate]
+		[Required]
 		public DateTime Debut { get; set; }
 		[Required]
 		public string Lieu { get; set; }

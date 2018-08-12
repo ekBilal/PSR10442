@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using PSR10442.Models;
 
-namespace PSR10442.API.Dal
+namespace PSR10442.API.Models
 {
 	public class Dal : IDisposable
 	{
@@ -16,11 +16,18 @@ namespace PSR10442.API.Dal
 		}
 
 		//COURS
-		public Cours AddCours(string nom, string intilule)
+		public Cours AddCours(string nom)
 		{
-			var cours = new Cours { Nom = nom, Intitule = intilule };
-			bdd.Cours.Add(cours);
-			bdd.SaveChanges();
+			var cours = new Cours { Nom = nom, Actif = true};
+			try
+			{
+				bdd.Cours.Add(cours);
+				bdd.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
 			return cours;
 		}
 
@@ -100,7 +107,7 @@ namespace PSR10442.API.Dal
 
 		public Etudiant GetEtudiant(int id)
 		{
-			var etudiant = bdd.Etudiant.FirstOrDefault(e => e.Id == id);
+			var etudiant = bdd.Etudiant.Find(id);
 			if (etudiant == null) throw new Exception("Etudiant introuvable");
 			return etudiant;
 		}
@@ -131,7 +138,7 @@ namespace PSR10442.API.Dal
 		//MESSAGE
 		public Message Message(Etudiant auteur, DemandeSeance demande, string text)
 		{
-			Message message = new Message { Auteur = auteur, Demande = demande, Text = text };
+			Message message = new Message { Etudiant = auteur, Demande = demande, Text = text };
 			bdd.Message.Add(message);
 			bdd.SaveChanges();
 			return message;

@@ -1,14 +1,18 @@
-﻿using System;
+﻿using PSR10442.API.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+using Newtonsoft.Json;
+
 namespace PSR10442.API.Controllers
 {
 	public class ValuesController : ApiController
 	{
+		private Dal dal = new Dal();
 		// GET api/values
 		public IEnumerable<string> Get()
 		{
@@ -18,7 +22,7 @@ namespace PSR10442.API.Controllers
 		// GET api/values/5
 		public string Get(int id)
 		{
-			return "value";
+			return JsonConvert.SerializeObject(dal.GetCours(id));
 		}
 
 		// POST api/values

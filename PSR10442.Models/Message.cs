@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 namespace PSR10442.Models
 {
 	public class Message
 	{
+		[Key]
 		public int Id { get; set; }
-		[Required]
-		public virtual Etudiant Auteur { get; set; }
-		[Required]
+		[Required, ForeignKey("Id")]
+		public virtual Etudiant Etudiant { get; set; }
+		[Required, ForeignKey("Id")]
 		public virtual DemandeSeance Demande { get; set; }
 		[Required]
 		public string Text { get; set; }

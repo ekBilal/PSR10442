@@ -185,11 +185,12 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\CoursController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="Dal\BddContext.cs" />
-    <Compile Include="Dal\Dal.cs" />
-    <Compile Include="Dal\IDal.cs" />
+    <Compile Include="Models\BddContext.cs" />
+    <Compile Include="Models\Dal.cs" />
+    <Compile Include="Models\IDal.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
