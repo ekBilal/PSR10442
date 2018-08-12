@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using PSR10442.Models;
 
-namespace PSR10442.API.Models
+namespace PSR10442.Bash
 {
 	public class Dal : IDisposable
 	{
@@ -24,9 +24,8 @@ namespace PSR10442.API.Models
 				bdd.Cours.Add(cours);
 				bdd.SaveChanges();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
-				Console.WriteLine(e.Message);
 			}
 			return cours;
 		}
@@ -95,7 +94,7 @@ namespace PSR10442.API.Models
 			return SetEtatDemande(id, Etat.Annule);
 		}
 
-
+			**/
 		//ETUDIANT
 		public Etudiant AddEtudiant(string nom, string prenom, string psr)
 		{
@@ -112,21 +111,21 @@ namespace PSR10442.API.Models
 			return etudiant;
 		}
 
-		public Etudiant InscrireCours(int idEtudiant, Cours cours)
-		{
-			var etudiant = GetEtudiant(idEtudiant);
-			etudiant.Inscrit.Add(cours);
-			bdd.SaveChanges();
-			return etudiant;
-		}
+		//public Etudiant InscrireCours(int idEtudiant, Cours cours)
+		//{
+		//	var etudiant = GetEtudiant(idEtudiant);
+		//	etudiant.Inscrit.Add(cours);
+		//	bdd.SaveChanges();
+		//	return etudiant;
+		//}
 
-		public Etudiant Tuteur(int idEtudiant, Cours cours)
-		{
-			var etudiant = GetEtudiant(idEtudiant);
-			etudiant.Tuteur.Add(cours);
-			bdd.SaveChanges();
-			return etudiant;
-		}
+		//public Etudiant Tuteur(int idEtudiant, Cours cours)
+		//{
+		//	var etudiant = GetEtudiant(idEtudiant);
+		//	etudiant.Tuteur.Add(cours);
+		//	bdd.SaveChanges();
+		//	return etudiant;
+		//}
 
 		public void Desinscire(int idEtudiant)
 		{
@@ -135,6 +134,19 @@ namespace PSR10442.API.Models
 			bdd.SaveChanges();
 		}
 
+
+		//INSCRIT
+
+		public Inscrit Inscrire(Etudiant etudiant, Cours cours)
+		{
+			var inscription = new Inscrit { Etudiant = etudiant, Cours = cours };
+			bdd.Inscrit.Add(inscription);
+			bdd.SaveChanges();
+			return inscription;
+		}
+
+
+		/**
 		//MESSAGE
 		public Message Message(Etudiant auteur, DemandeSeance demande, string text)
 		{
@@ -186,8 +198,8 @@ namespace PSR10442.API.Models
 		}
 
 
+	**/
 
-		**/
 
 
 		public void Dispose()

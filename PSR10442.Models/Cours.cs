@@ -8,7 +8,7 @@ namespace PSR10442.Models
     public class Cours
     {
 		[Key]
-		public int Id { get; set; }
+		public int IdCours { get; set; }
 		[Required]
 		public string Nom { get; set; }
 		[Required, DefaultValue(true)]

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSR10442.API", "PSR10442.AP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSR10442.API.Tests", "PSR10442.API.Tests\PSR10442.API.Tests.csproj", "{FE2164A5-BBB1-48B1-94BD-BC9C897D9F10}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSR10442.Bash", "PSR10442.Console\PSR10442.Bash.csproj", "{10DFE505-003A-4102-8831-F4BAC0CF5BE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{FE2164A5-BBB1-48B1-94BD-BC9C897D9F10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE2164A5-BBB1-48B1-94BD-BC9C897D9F10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE2164A5-BBB1-48B1-94BD-BC9C897D9F10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10DFE505-003A-4102-8831-F4BAC0CF5BE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10DFE505-003A-4102-8831-F4BAC0CF5BE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10DFE505-003A-4102-8831-F4BAC0CF5BE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10DFE505-003A-4102-8831-F4BAC0CF5BE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
