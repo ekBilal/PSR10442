@@ -12,10 +12,7 @@ namespace PSR10442.API.Models
 	public class BddContext : DbContext
 	{
 		public DbSet<Cours> Cours { get; set; }
-		public DbSet<DemandeSeance> DemandeSeances { get; set; }
 		public DbSet<Etudiant> Etudiant { get; set; }
-		public DbSet<Message> Message { get; set; }
-		public DbSet<Seance> Seances { get; set; }
-
+		public DbSet<Inscrit> Inscrit { get; set; }
 	}
 }

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Web.Http;
 using System.Web.Http.Description;
+
 using Newtonsoft.Json;
 
 using PSR10442.API.Models;
@@ -18,15 +16,15 @@ namespace PSR10442.API.Controllers
 		private Dal dal = new Dal();
 
 		// GET: api/Cours
-		public string Get()
+		[ResponseType(typeof(IList<Cours>))]
+		public IHttpActionResult Get()
 		{
 			var cours = dal.GetCours();
-			return JsonConvert.SerializeObject(cours);
+			return Ok(JsonConvert.SerializeObject(cours));
 		}
 
 		// GET: api/Cours/5
 		[ResponseType(typeof(Cours))]
-		[HttpGet]
 		public IHttpActionResult Get(int id)
 		{
 			var cours = dal.GetCours(id);
@@ -35,6 +33,7 @@ namespace PSR10442.API.Controllers
 
 		// POST: api/Cours
 		[HttpPost]
+		[ResponseType(typeof(Etudiant))]
 		public IHttpActionResult Post([FromBody] string nom)
 		{
 			if (string.IsNullOrWhiteSpace(nom)) { }
@@ -44,16 +43,34 @@ namespace PSR10442.API.Controllers
 		}
 
 		// PUT: api/Cours/5
-		public void Put(int id, [FromBody]string value)
+		[ResponseType(typeof(Etudiant))]
+		public IHttpActionResult Put([FromBody]Cours cours)
         {
-			throw new NotImplementedException();
-        }
+			if (!ModelState.IsValid) return BadRequest();
+			try
+			{
+				var newCours = dal.SetCours(cours);
+				return Ok(newCours);
+			}
+			catch (ObjectNotFoundException)
+			{
+				return NotFound();
+			}
+
+		}
 
         // DELETE: api/Cours/5
         public IHttpActionResult Delete(int id)
         {
-			dal.DeleteCours(id);
-			return Ok();
-        }
-    }
+			try
+			{
+				dal.DeleteCours(id);
+				return Ok();
+			}
+			catch (ObjectNotFoundException)
+			{
+				return BadRequest();
+			}
+		}
+	}
 }

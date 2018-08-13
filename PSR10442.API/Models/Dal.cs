@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
-using System.Web;
+
+
 using PSR10442.Models;
 
 namespace PSR10442.API.Models
@@ -18,18 +20,19 @@ namespace PSR10442.API.Models
 		//COURS
 		public Cours AddCours(string nom)
 		{
-			var cours = new Cours { Nom = nom, Actif = true};
+			var cours = new Cours { Nom = nom, Actif = true };
 			try
 			{
 				bdd.Cours.Add(cours);
 				bdd.SaveChanges();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
-				Console.WriteLine(e.Message);
 			}
 			return cours;
 		}
+
+
 
 		public ICollection<Cours> GetCours()
 		{
@@ -38,30 +41,32 @@ namespace PSR10442.API.Models
 
 		public Cours GetCours(int id)
 		{
-			var cours = bdd.Cours.FirstOrDefault(c => c.IdCours == id);
-			if (cours == null) throw new Exception("Cours introuvable");
+			var cours = bdd.Cours.Find(id);
+			if (cours == null) throw new ObjectNotFoundException();
 			return cours;
 		}
 
 		public Cours SetCours(Cours cours)
 		{
 			var oldCours = GetCours(cours.IdCours);
-			oldCours = cours;
+			oldCours.Nom = cours.Nom;
+			oldCours.Actif = cours.Actif;
 			bdd.SaveChanges();
-			return cours;
+			return oldCours;
 		}
 
 		public void DeleteCours(Cours cours)
 		{
 			DeleteCours(cours.IdCours);
 		}
-		
+
 		public void DeleteCours(int id)
 		{
 			var cours = GetCours(id);
 			cours.Actif = false;
 			bdd.SaveChanges();
 		}
+
 
 
 
@@ -95,38 +100,67 @@ namespace PSR10442.API.Models
 			return SetEtatDemande(id, Etat.Annule);
 		}
 
-
+			**/
 		//ETUDIANT
-		public Etudiant AddEtudiant(string nom, string prenom, string psr)
+		public Etudiant AddEtudiant(Etudiant etudiant)
 		{
-			var etudiant = new Etudiant { Nom = nom, Prenom = prenom, PSR = psr };
 			bdd.Etudiant.Add(etudiant);
 			bdd.SaveChanges();
 			return etudiant;
 		}
 
+		public IQueryable<Etudiant> GetEtudiants()
+		{
+			var etudiants = bdd.Etudiant.Where(e => e.estInscrit == true);
+			return etudiants;
+		}
+
 		public Etudiant GetEtudiant(int id)
 		{
 			var etudiant = bdd.Etudiant.Find(id);
-			if (etudiant == null) throw new Exception("Etudiant introuvable");
 			return etudiant;
 		}
 
-		public Etudiant InscrireCours(int idEtudiant, Cours cours)
+		public Etudiant SetEtudiant(int id, bool estInscrit)
 		{
-			var etudiant = GetEtudiant(idEtudiant);
-			etudiant.Inscrit.Add(cours);
+			var etudiant = bdd.Etudiant.Find(id);
+			if (etudiant == null) throw new ObjectNotFoundException();
+			etudiant.estInscrit = estInscrit;
 			bdd.SaveChanges();
 			return etudiant;
 		}
 
-		public Etudiant Tuteur(int idEtudiant, Cours cours)
+		public bool DeleteEtudiant(int id)
 		{
-			var etudiant = GetEtudiant(idEtudiant);
-			etudiant.Tuteur.Add(cours);
-			bdd.SaveChanges();
-			return etudiant;
+			var etudiant = bdd.Etudiant.Find(id);
+			if (etudiant == null) throw new ObjectNotFoundException();
+			etudiant.estInscrit = false;
+			try
+			{
+				bdd.SaveChanges();
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+			return true;
 		}
+
+		//public Etudiant InscrireCours(int idEtudiant, Cours cours)
+		//{
+		//	var etudiant = GetEtudiant(idEtudiant);
+		//	etudiant.Inscrit.Add(cours);
+		//	bdd.SaveChanges();
+		//	return etudiant;
+		//}
+
+		//public Etudiant Tuteur(int idEtudiant, Cours cours)
+		//{
+		//	var etudiant = GetEtudiant(idEtudiant);
+		//	etudiant.Tuteur.Add(cours);
+		//	bdd.SaveChanges();
+		//	return etudiant;
+		//}
 
 		public void Desinscire(int idEtudiant)
 		{
@@ -135,6 +169,32 @@ namespace PSR10442.API.Models
 			bdd.SaveChanges();
 		}
 
+
+		//INSCRIT
+
+		public Inscrit Inscrire(Etudiant etudiant, Cours cours)
+		{
+			var inscription = new Inscrit { Etudiant = etudiant, Cours = cours };
+			bdd.Inscrit.Add(inscription);
+			bdd.SaveChanges();
+			return inscription;
+		}
+
+		public Inscrit Inscrire(int idEtudiant, int idCours)
+		{
+			var etudiant = GetEtudiant(idEtudiant);
+			var cours = GetCours(idCours);
+			return Inscrire(etudiant, cours);
+		}
+
+		public IList<Inscrit> GetEtudiantInscrit(int idCours)
+		{
+			var inscrits = bdd.Inscrit.Where(i => i.Cours.IdCours == idCours).ToList();
+
+			return inscrits;
+		}
+
+		/**
 		//MESSAGE
 		public Message Message(Etudiant auteur, DemandeSeance demande, string text)
 		{
@@ -186,8 +246,8 @@ namespace PSR10442.API.Models
 		}
 
 
+	**/
 
-		**/
 
 
 		public void Dispose()
