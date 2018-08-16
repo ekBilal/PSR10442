@@ -13,10 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSR10442.API.Tests", "PSR10
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSR10442.Bash", "PSR10442.Console\PSR10442.Bash.csproj", "{10DFE505-003A-4102-8831-F4BAC0CF5BE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSR10442.Web", "PSR10442.Web\PSR10442.Web.csproj", "{660761D0-64C6-40DE-8999-B4FD2CD6E5E3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSR10442.Web.Tests", "PSR10442.Web.Tests\PSR10442.Web.Tests.csproj", "{F99ECD22-0065-4AEB-90A7-AEA74F1C384F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,14 +39,6 @@ Global
 		{10DFE505-003A-4102-8831-F4BAC0CF5BE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10DFE505-003A-4102-8831-F4BAC0CF5BE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10DFE505-003A-4102-8831-F4BAC0CF5BE3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{660761D0-64C6-40DE-8999-B4FD2CD6E5E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{660761D0-64C6-40DE-8999-B4FD2CD6E5E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{660761D0-64C6-40DE-8999-B4FD2CD6E5E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{660761D0-64C6-40DE-8999-B4FD2CD6E5E3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F99ECD22-0065-4AEB-90A7-AEA74F1C384F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F99ECD22-0065-4AEB-90A7-AEA74F1C384F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F99ECD22-0065-4AEB-90A7-AEA74F1C384F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F99ECD22-0065-4AEB-90A7-AEA74F1C384F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

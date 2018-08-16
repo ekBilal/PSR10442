@@ -2,7 +2,9 @@
 using System.Data;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Linq;
+
+using Newtonsoft.Json;
+
 using PSR10442.API.Models;
 using PSR10442.Models;
 
@@ -14,11 +16,11 @@ namespace PSR10442.API.Controllers
 		private Dal dal = new Dal();
 
 		// GET: api/Cours
-		[ResponseType(typeof(List<Cours>))]
+		[ResponseType(typeof(IList<Cours>))]
 		public IHttpActionResult Get()
 		{
 			var cours = dal.GetCours();
-			return Ok(cours);
+			return Ok(JsonConvert.SerializeObject(cours));
 		}
 
 		[Authorize]
@@ -32,17 +34,17 @@ namespace PSR10442.API.Controllers
 
 		// POST: api/Cours
 		[HttpPost]
-		[ResponseType(typeof(Cours))]
-		public IHttpActionResult Post()
+		[ResponseType(typeof(Etudiant))]
+		public IHttpActionResult Post([FromBody] string nom)
 		{
-			var nom = Request.Headers.GetValues("nom").FirstOrDefault();
-			if (string.IsNullOrWhiteSpace(nom)) return BadRequest();
-			var newCours = dal.AddCours(nom);
+			if (string.IsNullOrWhiteSpace(nom)) { }
+//				return BadRequest();
+			var newCours = dal.AddCours("Anglais");
 			return Ok(newCours);
 		}
 
 		// PUT: api/Cours/5
-		[ResponseType(typeof(Cours))]
+		[ResponseType(typeof(Etudiant))]
 		public IHttpActionResult Put([FromBody]Cours cours)
         {
 			if (!ModelState.IsValid) return BadRequest();

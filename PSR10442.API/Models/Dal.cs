@@ -34,7 +34,7 @@ namespace PSR10442.API.Models
 
 
 
-		public List<Cours> GetCours()
+		public ICollection<Cours> GetCours()
 		{
 			return bdd.Cours.Where(c => c.Actif == true).ToList();
 		}
