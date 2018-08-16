@@ -1,33 +1,45 @@
-﻿using Newtonsoft.Json;
-using PSR10442.Models;
-using System;
+﻿using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Mvc;
 using System.Net.Http.Headers;
-using System.Text;
+using System.Threading.Tasks;
+
+using Microsoft.IdentityModel.Clients;
+
+using Newtonsoft.Json;
+using PSR10442.Models;
 
 namespace PSR10442.Web.Controllers
 {
     public class CoursController : Controller
     {
 		HttpClient client = new HttpClient();
-		readonly Uri adress = new Uri("http://localhost:50823/api/");
+		readonly Uri address = new Uri("http://localhost:50823/api/");
+
+
 		// GET: Cours
 		public ActionResult Index()
         {
-			client.BaseAddress = adress;
+			client.BaseAddress = address;
 			var result = client.GetStringAsync("cours").Result;
 			var cours = JsonConvert.DeserializeObject<List<Cours>>(result);
 			return View(cours);
 		}
 
-        // GET: Cours/Details/5
-        public ActionResult Details(int id)
+		[Authorize]
+		// GET: Cours/Details/5
+		public async Task<ActionResult> Details(int id)
         {
-			client.BaseAddress = adress;
-			var result = client.GetStringAsync("cours/"+id).Result;
+			client.BaseAddress = address;
+
+			var token = await UserProfileController.GetToken();
+
+			
+
+			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+			var result = await client.GetStringAsync("cours/"+id);
 			var cours = JsonConvert.DeserializeObject<Cours>(result);
 			return View(cours);
 		}
@@ -44,7 +56,7 @@ namespace PSR10442.Web.Controllers
         {
             try
             {
-				client.BaseAddress = adress;
+				client.BaseAddress = address;
 				var nom = collection.GetValues("Nom").FirstOrDefault();
 				client.DefaultRequestHeaders.Add("nom", nom);
 				var rep = client.PostAsync("Cours",null);
@@ -68,7 +80,7 @@ namespace PSR10442.Web.Controllers
         {
             try
             {
-				client.BaseAddress = adress;
+				client.BaseAddress = address;
 				var nom = collection.GetValues("Nom").FirstOrDefault();
 				var actif = bool.Parse(collection.GetValues("Actif").FirstOrDefault());
 				var cours = new Cours { IdCours = id, Nom = nom, Actif = actif };

@@ -21,6 +21,7 @@ namespace PSR10442.API.Controllers
 			return Ok(cours);
 		}
 
+		[Authorize]
 		// GET: api/Cours/5
 		[ResponseType(typeof(Cours))]
 		public IHttpActionResult Get(int id)

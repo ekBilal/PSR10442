@@ -8,6 +8,7 @@ using System.Web.Http.Description;
 
 namespace PSR10442.API.Controllers
 {
+    [System.Web.Http.Authorize]
     public class InscriptionController : ApiController
     {
 		private Dal dal = new Dal();

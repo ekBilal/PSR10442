@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 
@@ -11,12 +12,17 @@ using PSR10442.Models;
 
 namespace PSR10442.Web.Controllers
 {
+	[System.Web.Mvc.Authorize]
 	public class HomeController : Controller
 	{
 		HttpClient client = new HttpClient();
 
 		public ActionResult Index()
 		{
+			string owner = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
+
+
+
 			return View();
 		}
 
