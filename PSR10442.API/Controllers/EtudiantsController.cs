@@ -10,6 +10,7 @@ using PSR10442.Models;
 
 namespace PSR10442.API.Controllers
 {
+	[System.Web.Http.Authorize]
 	public class EtudiantsController : ApiController
 	{
 		private Dal dal = new Dal();

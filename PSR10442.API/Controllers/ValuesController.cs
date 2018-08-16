@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 
 namespace PSR10442.API.Controllers
 {
+	[System.Web.Http.Authorize]
 	public class ValuesController : ApiController
 	{
 		private Dal dal = new Dal();
